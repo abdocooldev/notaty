@@ -18,13 +18,20 @@ class Database {
   addNote(note) {
     return new Promise((resolve, reject) => {
       note["createdDate"] = new Date();
-    note["updatedDate"] = new Date();
-    let newNote = new Note(note);
-    newNote
-      .save()
-      .then((doc) => resolve(doc))
-      .catch((err) => reject(err));
-    })
+      note["updatedDate"] = new Date();
+      let newNote = new Note(note);
+      newNote
+        .save()
+        .then((doc) => resolve(doc))
+        .catch((err) => reject(err));
+    });
+  }
+  getNotes() {
+    return new Promise((resolve, reject) => {
+      Note.find({})
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    });
   }
 }
 module.exports = Database;

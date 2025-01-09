@@ -10,8 +10,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let notes = [];
-
 app.post("/notes", (req, res) => {
   const body = req.body;
   db.addNote(body)
@@ -20,7 +18,9 @@ app.post("/notes", (req, res) => {
 });
 
 app.get("/notes", (req, res) => {
-  res.send(notes);
+  db.getNotes()
+    .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
 });
 
 const port = 3000;
