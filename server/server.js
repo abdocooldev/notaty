@@ -14,10 +14,9 @@ let notes = [];
 
 app.post("/notes", (req, res) => {
   const body = req.body;
-  console.log("BODY:", body);
-  notes.push(body);
-  console.log("Notes:", notes);
-  res.send(true);
+  db.addNote(body)
+    .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/notes", (req, res) => {
