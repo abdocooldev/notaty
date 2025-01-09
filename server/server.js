@@ -3,6 +3,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+const Database = require("./Database");
+const db = new Database();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -25,4 +27,5 @@ app.get("/notes", (req, res) => {
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server has started on port ${port}...`);
+  db.connect();
 });
