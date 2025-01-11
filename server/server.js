@@ -42,6 +42,19 @@ app.get("/note/:id", (req, res) => {
     });
 });
 
+// Update Specific Note
+app.put("/notes", (req, res) => {
+  db.updateNote(req.body)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Note id not exist, Requested id: " + id);
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => res.status(500).send(err));
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server has started on port ${port}...`);
