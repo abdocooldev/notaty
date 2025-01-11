@@ -48,5 +48,20 @@ class Database {
         .catch((err) => reject(err));
     });
   }
+  deleteNote(id) {
+    return new Promise((resolve, reject) => {
+      Note.findByIdAndDelete(id)
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    });
+  }
+  getNotesByTitle(noteTitle) {
+    return new Promise((resolve, reject) => {
+      const query = { title: { $regex: new RegExp(noteTitle, "i") } };
+      Note.find(query)
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    });
+  }
 }
 module.exports = Database;

@@ -18,15 +18,22 @@ app.post("/notes", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-// Get All Data API
+// Get All Data API Or Search For title
 app.get("/notes", (req, res) => {
-  db.getNotes()
-    .then((data) => res.send(data))
-    .catch((err) => res.status(500).send(err));
+  const { title } = req.query;
+  if (title) {
+    db.getNotesByTitle(title)
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send(err));
+  } else {
+    db.getNotes()
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send(err));
+  }
 });
 
-// Get Specific Data API
-app.get("/note/:id", (req, res) => {
+// Get Specific Note Data API
+app.get("/notes/:id", (req, res) => {
   const { id } = req.params;
   db.getNoteById(id)
     .then((data) => {
@@ -42,7 +49,7 @@ app.get("/note/:id", (req, res) => {
     });
 });
 
-// Update Specific Note
+// Update Note API
 app.put("/notes", (req, res) => {
   db.updateNote(req.body)
     .then((data) => {
@@ -53,6 +60,23 @@ app.put("/notes", (req, res) => {
       }
     })
     .catch((err) => res.status(500).send(err));
+});
+
+// Delete Note API
+app.delete("/notes/:id", (req, res) => {
+  const { id } = req.params;
+  db.deleteNote(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Note id not exist, Requested id: " + id);
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+      console.log(err);
+    });
 });
 
 const port = 3000;
