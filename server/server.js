@@ -10,6 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// POST API
 app.post("/notes", (req, res) => {
   const body = req.body;
   db.addNote(body)
@@ -17,10 +18,28 @@ app.post("/notes", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+// Get All Data API
 app.get("/notes", (req, res) => {
   db.getNotes()
     .then((data) => res.send(data))
     .catch((err) => res.status(500).send(err));
+});
+
+// Get Specific Data API
+app.get("/note/:id", (req, res) => {
+  const { id } = req.params;
+  db.getNoteById(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Note id not exist, Requested id: " + id);
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+      console.log(err);
+    });
 });
 
 const port = 3000;
