@@ -19,7 +19,7 @@ function updateNotesTable(noteTitle) {
       <img src="images/edit.png" alt="Edit Icon" style="width: 22px"  />
       </button>
       <button style="cursor: pointer; background-color: transparent; border: none">
-      <img src="images/delete.png" alt="Delete Icon" style="width: 22px"  />
+      <img src="images/delete.png" alt="Delete Icon" onclick="confirmDeleteNote('${note["_id"]}')" style="width: 22px"  />
       </button>`;
     });
   });
@@ -35,4 +35,14 @@ searchInput.addEventListener("keypress", function (e) {
 function searchNotes() {
   let searchTitle = searchInput.value;
   updateNotesTable(searchTitle);
+}
+
+// Delete Note Method
+function confirmDeleteNote(noteId) {
+  let action = confirm("Are you sure that you want to delete this note?");
+  if (action) {
+    deleteNote(noteId).then(() => {
+      updateNotesTable();
+    });
+  }
 }
