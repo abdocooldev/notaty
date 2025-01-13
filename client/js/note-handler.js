@@ -1,7 +1,11 @@
 // Update Notes Table Method
-function updateNotesTable() {
+function updateNotesTable(noteTitle) {
   let table = document.querySelector("#notes-table");
-  getNotes().then((data) => {
+  let rowCount = table.rows.length;
+  while (--rowCount) {
+    table.deleteRow(rowCount);
+  }
+  getNotes(noteTitle).then((data) => {
     data.forEach((note) => {
       let row = table.insertRow(1);
       let cell1 = row.insertCell(0);
@@ -19,4 +23,16 @@ function updateNotesTable() {
       </button>`;
     });
   });
+}
+
+// Search For Note Method
+let searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    searchNotes();
+  }
+});
+function searchNotes() {
+  let searchTitle = searchInput.value;
+  updateNotesTable(searchTitle);
 }
