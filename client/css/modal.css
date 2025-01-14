@@ -38,6 +38,12 @@ textarea {
   animation-name: slideIn;
   animation-duration: 0.4s;
 }
+@media (max-width: 768px) {
+  .modal-content {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
 
 /* The Close X Button */
 .close {
@@ -65,9 +71,9 @@ textarea {
 }
 
 .modal-body p {
-    font-size: 17px;
-    padding: 0px;
-    margin-top: 9px;
+  font-size: 17px;
+  padding: 0px;
+  margin-top: 9px;
 }
 
 .modal-footer {
@@ -97,8 +103,10 @@ textarea {
 }
 
 .row {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 15px;
 }
 
 .row:after {
@@ -108,16 +116,20 @@ textarea {
 }
 
 .left {
-  float: left;
   width: 10%;
+  min-width: 80px;
   text-align: left;
 }
 
 .right {
-  float: left;
-  width: 90%;
+  width: 100%;
 }
-
+@media (max-width: 768px) {
+  .row {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+}
 .modal-input {
   width: 100%;
   height: 32px;
@@ -125,6 +137,6 @@ textarea {
 }
 
 .error {
-  color: red; 
+  color: red;
   text-align: center;
 }

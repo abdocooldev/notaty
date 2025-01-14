@@ -27,9 +27,10 @@ function saveNewNote() {
   let noteData = { title: titleValue, content: contentValue };
   addNote(noteData)
     .then((response) => {
+      let data = response.json();
       if (response.ok) {
         hideModal(addNoteModal);
-        updateNotesTable();
+        return data;
       } else {
         response
           .text()
@@ -37,6 +38,7 @@ function saveNewNote() {
           .catch((error) => console.log(error));
       }
     })
+    .then((data) => updateNotesTable(data["_id"]))
     .catch((error) => (errEl.innerHTML = error));
 }
 // Open Edit Modal Method
@@ -74,9 +76,10 @@ function saveEditNote() {
   };
   updateNote(noteData)
     .then((response) => {
+      let data = response.json();
       if (response.ok) {
         hideModal(editNoteModal);
-        updateNotesTable();
+        return data;
       } else {
         response
           .text()
@@ -84,5 +87,6 @@ function saveEditNote() {
           .catch((error) => console.log(error));
       }
     })
+    .then((data) => updateNotesTable(data["_id"]))
     .catch((error) => (errEl.innerHTML = error));
 }

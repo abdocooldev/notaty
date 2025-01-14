@@ -4,18 +4,25 @@
 
 body {
   text-align: center;
+  overflow-x: hidden;
 }
 
 h1 {
   font-family: "Indie Flower", cursive;
+  margin: 0px;
+}
+@media (max-width: 220px) {
+  h1 {
+    display: none;
+  }
 }
 
 /* Top Navigation Bar */
 
 .navigation-container {
-  width: 0%;
-  float: left;
-  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navigation-bar {
@@ -33,14 +40,31 @@ h1 {
   height: 60px;
 }
 
+/* Options Container */
+#options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Search Input Field */
 
 .search-input {
   width: 50%;
   height: 32px;
   font-size: 17px;
+  margin: 4px;
 }
-
+@media (max-width: 425px) {
+  .search-input {
+    width: 100%;
+  }
+  .action-button {
+    width: 100%;
+  }
+}
 /* The Blue Button */
 
 .action-button {
@@ -63,14 +87,18 @@ h1 {
 }
 
 /* The Notes Table */
-
+@media (max-width: 375px) {
+  #main-content {
+    overflow-x: scroll;
+  }
+}
 table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
   font-size: 17px;
+  min-width: 350px;
 }
-
 td,
 th {
   border: 1px solid rgb(233, 233, 233);
