@@ -39,3 +39,12 @@ function saveNewNote() {
     })
     .catch((error) => (errEl.innerHTML = error));
 }
+
+function openEditModal(noteId) {
+  let editNoteModal = document.getElementById("editNoteModal");
+  showModal(editNoteModal);
+  let closeBtn = document.getElementById("closeEdit");
+  let cancelBtn = document.getElementById("cancelEditNoteBtn");
+  closeBtn.onclick = () => hideModal(editNoteModal);
+  cancelBtn.onclick = () => hideModal(editNoteModal);
+}

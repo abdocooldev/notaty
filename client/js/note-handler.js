@@ -15,11 +15,11 @@ function updateNotesTable(noteTitle) {
       cell1.innerHTML = note.title;
       cell2.innerHTML = note.content;
       cell3.innerHTML = new Date(note.updatedDate).toUTCString();
-      cell4.innerHTML = `<button style="cursor: pointer; background-color: transparent; border: none">
+      cell4.innerHTML = `<button onclick="openEditModal('${note["_id"]}')" style="cursor: pointer; background-color: transparent; border: none">
       <img src="images/edit.png" alt="Edit Icon" style="width: 22px"  />
       </button>
-      <button style="cursor: pointer; background-color: transparent; border: none">
-      <img src="images/delete.png" alt="Delete Icon" onclick="confirmDeleteNote('${note["_id"]}')" style="width: 22px"  />
+      <button onclick="confirmDeleteNote('${note["_id"]}')" style="cursor: pointer; background-color: transparent; border: none">
+      <img src="images/delete.png" alt="Delete Icon" style="width: 22px"  />
       </button>`;
     });
   });
