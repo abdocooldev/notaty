@@ -3,7 +3,9 @@ const Note = require("./schemas/note");
 
 class Database {
   constructor() {
-    this.Url = "mongodb://127.0.0.1:27017/notaty";
+    // this.Url = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/notaty";
+    this.Url =
+      process.env.MONGODB_URL || "mongodb+srv://abdocooldev:DZKrpUaEAUtxG61z@cluster0.cbr1a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
   }
   connect() {
     mongoose
